@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:33067/big_event
+    username: root
+    password: 1234
+
+
+mybatis:
+  configuration:
+#    開啟駝峰命名和下滑縣命名的自動轉換
+    map-underscore-to-camel-case: true
