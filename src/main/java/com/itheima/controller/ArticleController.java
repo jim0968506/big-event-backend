@@ -1,16 +1,32 @@
 package com.itheima.controller;
 
-
+import com.itheima.pojo.Article;
+import com.itheima.pojo.PageBean;
 import com.itheima.pojo.Result;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.itheima.service.ArticleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
-    @GetMapping("/list")
-    public Result<String> list(){
-        return Result.success("list所有文章");
+    @Autowired
+    private ArticleService articleService;
+    @PostMapping
+    public Result add(@RequestBody @Validated Article article){
+        articleService.add(article);
+        return Result.success();
+    }
+
+    @GetMapping
+    public Result<PageBean<Article>>list(
+            Integer pageNum,
+            Integer pageSize,
+            @RequestParam(required = false) Integer categoryId,
+            @RequestParam(required = false)String state
+    ){
+        PageBean<Article> pd = articleService.list(pageNum,pageSize,categoryId,state);
+        return Result.success(pd);
     }
 }
