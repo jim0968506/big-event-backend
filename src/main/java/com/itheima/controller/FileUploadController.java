@@ -19,6 +19,6 @@ public class FileUploadController {
 //        保證文件的名字是依樣的 從而防止文件覆蓋
         String filename = UUID.randomUUID().toString()+originalFilename.substring(originalFilename.lastIndexOf("."));
         file.transferTo(new File("C:\\Users\\jim09\\Desktop\\files\\"+filename));
-        return Result.success("url放問地址");
+        return Result.success("url訪問地址");
     }
 }
